@@ -18,13 +18,10 @@ glutDisplayFunc(showScreen)  # Tell OpenGL to call the showScreen method continu
 glutIdleFunc(showScreen)     # Draw any graphics or shapes in the showScreen function at all times
 
 def compileShader(shader_type, source):
-
-    import ipdb; ipdb.set_trace();
     shader = glCreateShader(shader_type) # e.g GL_VERTEX_SHADER
-    glShaderSource(shader, 1, source, len(source))
+    glShaderSource(shader, source)
     glCompileShader(shader)
-    isCompiled = 0
-    glGetShaderiv(shader, GL_COMPILE_STATUS, isCompiled)
+    isCompiled = glGetShaderiv(shader, GL_COMPILE_STATUS)
 
     if isCompiled == GL_FALSE:
         print("Failed to compile shader")
@@ -47,8 +44,9 @@ def compileProgram(vertex_path, fragment_path):
     glAttachShader(program, fragment_shader)
     glLinkProgram(program)
 
-    isLinked = 0
-    glGetProgramiv(program, GL_LINK_STATUS, isLinked)
+    import ipdb; ipdb.set_trace();
+
+    isLinked = glGetProgramiv(program, GL_LINK_STATUS)
     if isLinked == GL_FALSE:
         print("Failed to link shader")
         exit(1)
@@ -58,6 +56,6 @@ def compileProgram(vertex_path, fragment_path):
 
     return program
 
-program = compileProgram("src/visualizer/shaders/default.frag", "src/visualizer/shaders/default.vert")
+program = compileProgram("src/visualizer/shaders/default.vert", "src/visualizer/shaders/default.frag")
 
 glutMainLoop()  # Keeps the window created above displaying/running in a loop
