@@ -27,12 +27,12 @@ pipeline {
                         pycodestyle examples > pep8.report || true
                     '''
             }
-            // post {
-            //     always{
-            //         recordIssues enabledForFailure: true, tools: [pep8()], qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
-            //     }
+            post {
+                always{
+                    recordIssues enabledForFailure: true, tools: [pep8(pattern: "pep8.report")], qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
+                }
 
-            // }
+            }
         }
         stage('Deploy') {
             steps {
