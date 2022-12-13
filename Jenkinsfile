@@ -24,7 +24,7 @@ pipeline {
                 sh 'ls'
                 sh  ''' 
                         python -m pip install pycodestyle
-                        pycodestyle examples > pep8.report || true
+                        pycodestyle ./ > pep8.report || true
                     '''
             }
             post {
