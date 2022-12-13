@@ -24,7 +24,7 @@ pipeline {
                 sh 'ls'
                 sh  ''' 
                         python -m pip install pycodestyle
-                        pycodestyle ./ > pep8.report || true
+                        pycodestyle --max-line-length=200 ./ > pep8.report || true
                     '''
             }
             post {
