@@ -24,15 +24,15 @@ pipeline {
                 sh 'ls'
                 sh  ''' 
                         python -m pip install pycodestyle
-                        pycodestyle examples > pep8.report
+                        pycodestyle examples > pep8.report || true
                     '''
             }
-            post {
-                always{
-                    recordIssues enabledForFailure: true, tools: [pep8()]
-                }
+            // post {
+            //     always{
+            //         recordIssues enabledForFailure: true, tools: [pep8()], qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
+            //     }
 
-            }
+            // }
         }
         stage('Deploy') {
             steps {
