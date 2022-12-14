@@ -22,7 +22,7 @@ $filesToInstall = Get-ChildItem "$root/src/visualizer/Installers" | Where-Object
 
 foreach ($file in $filesToInstall)
 {
-    pip install $($file.FullName)
+    python -m pip install $($file.FullName)
 }
 
-pip install -r "$root/src/visualizer/Installers/required.txt"
+python -m pip install -r "$root/src/visualizer/Installers/required.txt"
