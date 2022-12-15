@@ -1,0 +1,6 @@
+[tool.pylint.format]
+max-line-length = 200
+
+[tool.pylint.design]
+min-public-methods = 1
+max-attributes = 200

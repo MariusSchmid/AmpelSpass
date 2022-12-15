@@ -21,15 +21,17 @@ pipeline {
             }
             steps {
                 echo "Pep8 style check"
-                sh 'ls'
                 sh  ''' 
                         python -m pip install pycodestyle
                         pycodestyle --max-line-length=200 ./ > pep8.report || true
+                        python -m pip install pylint
+                        pylint --recursive=y --output-format=parseable  --rcfile=./devops/pylintrc ./ > pylint.report || true
                     '''
             }
             post {
                 always{
                     recordIssues enabledForFailure: true, tools: [pep8(pattern: "pep8.report")], qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
+                    recordIssues enabledForFailure: true, tools: [pyLint(pattern: "pylint.report")], qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
                 }
 
             }
