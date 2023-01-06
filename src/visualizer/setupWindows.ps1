@@ -13,6 +13,10 @@ Write-Host "Activating venv in $venvPath"
 
 & $venvPath
 
+Write-Host "Updating pip"
+
+python.exe -m pip install --upgrade pip
+
 $version = python --version
 $versionString = (((python --version) -split "\.")[0..1] -join "" -replace "Python", "").Trim()
 

@@ -4,7 +4,7 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import os
 import numpy
-print("Imports successful!") # If you see this printed to the console then installation was successful
+import utils
 
 
 glutInit() # Initialize a glut instance which will allow us to customize our window
@@ -51,7 +51,8 @@ def compileProgram(vertex_path, fragment_path):
     return program
 
 global program
-program = compileProgram("src/visualizer/shaders/default.vert", "src/visualizer/shaders/default.frag")
+root_dir = utils.getRootDir()
+program = compileProgram(root_dir + "/src/visualizer/shaders/default.vert", root_dir + "/src/visualizer/shaders/default.frag")
 glUseProgram(program)
 
 global vao
